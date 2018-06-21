@@ -1,4 +1,6 @@
 # kafka-ansible
+Pending ansible-playbooks...
+
 ## Installation
 ### VirtualBox​​
 1) Visit https://www.virtualbox.org/wiki/Linux_Downloads
@@ -69,4 +71,15 @@ vlikfk03 | SUCCESS => {
     "changed": false, 
     "ping": "pong"
 }
+```
+
+
+
+**¡¡¡PENDING (ansible-playbooks)!!!**
+
+
+
+## Destroy Environment
+```
+# vagrant destroy
 ```
