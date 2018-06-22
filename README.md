@@ -45,7 +45,7 @@ Test SSH access (CLI):
 ```
 Edit hosts configuration (if neccesary):
 ```
-# vim kafka-hosts
+# vim production
 ​​vlikfk01 ansible_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vlikfk01/virtualbox/private_key
 vlikfk02 ansible_host=127.0.0.1 ansible_ssh_port=2200 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vlikfk02/virtualbox/private_key
 vlikfk03 ansible_host=127.0.0.1 ansible_ssh_port=2201 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vlikfk03/virtualbox/private_key
@@ -55,7 +55,7 @@ vlikfk[01:03]
 ```
 Test SSH access (ansible):
 ```
-# ansible all -m ping -i kafka-hosts
+# ansible all -m ping -i production
 ```
 Output:
 ```

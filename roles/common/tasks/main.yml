@@ -1,0 +1,37 @@
+- name: Upgrade all packages
+  yum: name=* state=latest
+
+- name: Install OpenJDK Environment
+  yum:
+    name: java-1.8.0-openjdk.x86_64
+    state: latest
+
+- name: Download Scala
+  get_url:
+    url: https://downloads.lightbend.com/scala/2.11.12/scala-2.11.12.tgz
+    dest: /tmp/
+    mode: 0755
+
+- name: Untar Scala
+  unarchive:
+    src: /tmp/scala-2.11.12.tgz
+    dest: /opt
+    remote_src: yes
+
+- name: Setup owner/group and permissions
+  file:
+    path: /opt/scala-2.11.12
+    owner: root
+    group: root
+    mode: 0755
+    recurse: yes
+
+- name: Create scala symbolic link
+  file:
+    src: /opt/scala-2.11.12
+    dest: /opt/scala
+    owner: root
+    group: root
+    state: link
+
+# vm.swapiness=0

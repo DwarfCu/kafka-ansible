@@ -1,0 +1,10 @@
+# master playbook
+- hosts: kafka_broker_nodes
+  roles:
+    - common
+  become: true
+
+- hosts: kafka_broker_nodes
+  roles:
+    - zk-kafka
+  become: true
