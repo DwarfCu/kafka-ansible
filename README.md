@@ -72,13 +72,9 @@ vlikfk03 | SUCCESS => {
     "ping": "pong"
 }
 ```
-
-
-
-**¡¡¡PENDING (ansible-playbooks)!!!**
-
-
-
+```
+# ansible-playbook -i production site.yml
+```
 ## Destroy Environment
 ```
 # vagrant destroy

@@ -6,5 +6,15 @@
 
 - hosts: kafka_broker_nodes
   roles:
-    - zk-kafka
+    - kafka-sw
+  become: true
+
+- hosts: kafka_broker_nodes
+  roles:
+    - zookeeper
+  become: true
+
+- hosts: kafka_broker_nodes
+  roles:
+    - kafka-broker
   become: true

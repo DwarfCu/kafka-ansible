@@ -1,0 +1,34 @@
+- name: Configure Zookeeper server (zookeeper.properties)
+  template:
+    src: zookeeper.properties.j2
+    dest: /opt/kafka/config/zookeeper.properties
+
+- name: Creates Zookeeper dir
+  file:
+    path: /var/lib/zookeeper
+    owner: kafka
+    group: kafka
+    mode: 0700
+    state: directory
+
+- name: Configure Zookeeper myid (Quorum)
+  template:
+    src: myid.j2
+    dest: /var/lib/zookeeper/myid
+
+- name: Create Zookeeper service
+  copy:
+    src: zookeeper.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: 0440
+  notify:
+    - restart zookeeper service
+
+- name: Enable Zookeeper service
+  systemd:
+    name: zookeeper.service
+    daemon_reload: yes
+    enabled: yes
+    masked: no

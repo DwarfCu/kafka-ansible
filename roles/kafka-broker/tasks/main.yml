@@ -1,0 +1,29 @@
+- name: Creates kafka log files
+  file:
+    path: /kafka-logs
+    owner: kafka
+    group: kafka
+    mode: 0755
+    state: directory
+
+- name: Configure Kafka server (server.properties)
+  template:
+    src: server.properties.j2
+    dest: /opt/kafka/config/server.properties
+
+- name: Create Kafka service
+  copy:
+    src: kafka.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: 0440
+  notify:
+    - restart kafka service
+
+- name: Enable Kafka service
+  systemd:
+    name: kafka.service
+    daemon_reload: yes
+    enabled: yes
+    masked: no

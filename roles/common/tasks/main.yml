@@ -1,5 +1,5 @@
-- name: Upgrade all packages
-  yum: name=* state=latest
+#- name: Upgrade all packages
+#  yum: name=* state=latest
 
 - name: Install OpenJDK Environment
   yum:

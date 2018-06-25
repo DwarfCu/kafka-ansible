@@ -1,0 +1,41 @@
+- name: Create kafka group
+  group:
+    name: kafka
+
+- name: Create kafka user
+  user:
+    name: kafka
+    group: kafka
+
+- name: Download Apache Kafka
+  get_url:
+    url: http://apache.rediris.es/kafka/1.1.0/kafka_2.11-1.1.0.tgz
+    dest: /tmp/
+    mode: 0755
+
+- name: Untar Kafka
+  unarchive:
+    src: /tmp/kafka_2.11-1.1.0.tgz
+    dest: /opt
+    remote_src: yes
+
+- name: Create kafka symbolic link
+  file:
+    src: /opt/kafka_2.11-1.1.0
+    dest: /opt/kafka
+    owner: kafka
+    group: kafka
+    state: link
+
+- name: Creates kafka logs dir
+  file:
+    path: /opt/kafka/logs
+    state: directory
+
+- name: Setup owner/group and permissions
+  file:
+    path: /opt/kafka_2.11-1.1.0
+    owner: kafka
+    group: kafka
+    mode: 0755
+    recurse: yes
