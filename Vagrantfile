@@ -8,24 +8,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.memory = "2048"
   end
 
-  # vlikfk01
+  # ZK & KAFKA
   config.vm.define "vlikfk01" do |vlikfk01|
     vlikfk01.vm.hostname = "vlikfk01"
-    vlikfk01.vm.network "private_network", ip: "172.20.20.10"
+    vlikfk01.vm.network "private_network", ip: "172.10.0.11"
   end
   # End vlikfk01
 
-  # vlikfk02
   config.vm.define "vlikfk02" do |vlikfk02|
     vlikfk02.vm.hostname = "vlikfk02"
-    vlikfk02.vm.network "private_network", ip: "172.20.20.20"
+    vlikfk02.vm.network "private_network", ip: "172.10.0.12"
   end
   # End vlikfk02
 
-  # vlikfk03
   config.vm.define "vlikfk03" do |vlikfk03|
     vlikfk03.vm.hostname = "vlikfk03"
-    vlikfk03.vm.network "private_network", ip: "172.20.20.30"
+    vlikfk03.vm.network "private_network", ip: "172.10.0.13"
   end
   # End vlikfk03
 
