@@ -1,6 +1,5 @@
 # kafka-ansible
-Pending ansible-playbooks...
-
+Automatic deployment (Vagrant) and configuration (Ansible) of a Zookeeper and Kafka cluster (3 nodes).
 ## Installation
 ### VirtualBox​​
 1) Visit https://www.virtualbox.org/wiki/Linux_Downloads
@@ -32,50 +31,13 @@ Oracle VM VirtualBox Manager 5.2.12
 ```
 # git clone https://github.com/DwarfCu/kafka-ansible.git
 ```
-## Run environment
+## Environment
 ```
+# cd kafka-ansible
 # vagrant up
-```
-Test SSH access (CLI):
-```
-# ssh -p 2222 vagrant@127.0.0.1 -i .vagrant/machines/vlikfk01/virtualbox/private_key
-```
-```
-​vagrant@vlikfk01$ exit​
-```
-Edit hosts configuration (if neccesary):
-```
-# vim production
-​​vlikfk01 ansible_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vlikfk01/virtualbox/private_key
-vlikfk02 ansible_host=127.0.0.1 ansible_ssh_port=2200 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vlikfk02/virtualbox/private_key
-vlikfk03 ansible_host=127.0.0.1 ansible_ssh_port=2201 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vlikfk03/virtualbox/private_key
-
-[kafka_broker_nodes]
-vlikfk[01:03]
-```
-Test SSH access (ansible):
-```
-# ansible all -m ping -i production
-```
-Output:
-```
-vlikfk01 | SUCCESS => {
-    "changed": false, 
-    "ping": "pong"
-}
-vlikfk02 | SUCCESS => {
-    "changed": false, 
-    "ping": "pong"
-}
-vlikfk03 | SUCCESS => {
-    "changed": false, 
-    "ping": "pong"
-}
-```
-```
 # ansible-playbook -i production site.yml
 ```
-## Destroy Environment
+Destroy environment:
 ```
 # vagrant destroy
 ```
