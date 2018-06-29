@@ -12,6 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "vlingx01" do |vlingx01|
     vlingx01.vm.hostname = "vlingx01"
     vlingx01.vm.network "private_network", ip: "172.10.0.3"
+    vlingx01.vm.network "forwarded_port", guest: 8081, host: 8081
   end
   # End vlingx01
 

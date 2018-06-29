@@ -1,0 +1,69 @@
+###you can uncomment next two lines for easy debug
+###Warning: if master_process is off, there will be only one nginx worker running. Only use it for debug propose.
+#daemon  off;
+#master_process  off;
+
+#user nginx;
+
+worker_processes  1;
+
+error_log  /opt/nginx/logs/error.log;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    client_max_body_size 5M;
+    client_body_in_file_only clean;
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    jvm_path /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/lib/amd64/server/libjvm.so;
+
+    ### Set my app jars and resources, it must include nginx-clojure runtime jar,e.g. nginx-clojure-0.4.5.jar and
+    ### for clojure user clojure runtime jar is also needed.
+    ### See http://nginx-clojure.github.io/directives.html#jvm_classpath
+    jvm_classpath '/opt/nginx/jars/*';
+
+    ###jvm heap memory
+    #jvm_options "-Xms1024m";
+    #jvm_options "-Xmx1024m";
+
+    #for enable java remote debug uncomment next two lines
+    #jvm_options "-Xdebug";
+    #jvm_options "-Xrunjdwp:server=y,transport=dt_socket,address=840#{pno},suspend=n";
+
+    ###threads number for request handler thread pool on jvm, default is 0.
+    ###check more details from
+    #jvm_workers 8;
+
+    server {
+        listen 8081;
+
+        location / {
+            handler_type 'java';
+            handler_name 'com.dwarfcu.kafka.producer';
+
+            auth_basic "Restricted Content";
+            auth_basic_user_file /opt/nginx/.htpasswd;
+         }
+
+        access_log /opt/nginx/logs/access8081.log;
+        error_log /opt/nginx/logs/error8081.log;
+    }
+}

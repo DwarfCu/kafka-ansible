@@ -1,0 +1,71 @@
+- name: Create nginx group
+  group:
+    name: nginx
+
+- name: Create nginx user
+  user:
+    name: nginx
+    group: nginx
+
+- name: Download nginx-clojure
+  get_url:
+    url: https://downloads.sourceforge.net/project/nginx-clojure/nginx-clojure-0.4.5.tar.gz
+    dest: /tmp/
+    mode: 0755
+
+- name: Untar nginx-clojure
+  unarchive:
+    src: /tmp/nginx-clojure-0.4.5.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Create nginx symbolic link
+  file:
+    src: /opt/nginx-clojure-0.4.5
+    dest: /opt/nginx
+    owner: nginx
+    group: nginx
+    state: link
+
+- name: Setup owner/group and permissions
+  file:
+    path: /opt/nginx-clojure-0.4.5
+    owner: nginx
+    group: nginx
+    mode: 0755
+    recurse: yes
+
+- name: Install python-passlib (requirement for htpasswd module)
+  yum:
+    name: python-passlib
+    state: present
+
+- name: Create htpasswd file
+  htpasswd:
+    path: /opt/nginx/.htpasswd
+    name: kafka
+    password: 'k4fk4'
+    owner: nginx
+    group: nginx
+    mode: 0600
+
+# Pending modify JAR with the right kafka cluster ips
+- name: Copy JAR file
+  copy:
+    src: logista-kafka-1.0-SNAPSHOT.jar
+    dest: /opt/nginx/jars/
+    owner: nginx
+    group: nginx
+    mode: 0755
+
+- name: Configure Nginx server (nginx.conf)
+  template:
+    src: nginx.conf.j2
+    dest: /opt/nginx/conf/nginx.conf
+
+- name: Start Nginx server
+  shell: /opt/nginx/nginx-linux-x64 -c /opt/nginx/conf/nginx.conf
+  args:
+    chdir: /opt/nginx/
+  become: true
+  become_user: nginx
