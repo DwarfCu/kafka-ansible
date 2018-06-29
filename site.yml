@@ -1,7 +1,12 @@
 # master playbook
-- hosts: kafka_broker_nodes
+- hosts: all
   roles:
     - common
+  become: true
+
+- hosts: nginx
+  roles:
+    - nginx
   become: true
 
 - hosts: kafka_broker_nodes
