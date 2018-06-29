@@ -13,7 +13,7 @@ Oracle VM VirtualBox Manager 5.2.12
 ### Vagrant
 1) ​Visit ​https://releases.hashicorp.com/vagrant/
 2) Download ​and install ej. ​vagrant_2.1.1_x86_64.deb
-​3) Run:
+3) Run:
 ```
 # vagrant -v
 ​​​Vagrant 2.1.1
