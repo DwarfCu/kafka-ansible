@@ -39,7 +39,7 @@ Oracle VM VirtualBox Manager 5.2.12
 ```
 Send messages to topic:
 ```
-curl "mensaje" -u kafka:k4fk4 http://127.0.0.1:8081
+curl "message" -u kafka:k4fk4 http://127.0.0.1:8081
 ```
 
 Destroy environment:
