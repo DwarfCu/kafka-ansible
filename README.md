@@ -1,5 +1,8 @@
 # kafka-ansible
-Automatic deployment (Vagrant) and configuration (Ansible) of a Zookeeper and Kafka cluster (3 nodes).
+Automatic deployment (Vagrant) and configuration (Ansible) of:
+ - Zookeeper and Kafka cluster x3 nodes.
+ - Nginx server (as Kafka Producer) x1 node.
+
 ## Installation
 #### VirtualBox​​
 1) Visit https://www.virtualbox.org/wiki/Linux_Downloads
