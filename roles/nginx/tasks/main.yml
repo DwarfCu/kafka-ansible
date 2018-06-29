@@ -52,7 +52,7 @@
 # Pending modify JAR with the right kafka cluster ips
 - name: Copy JAR file
   copy:
-    src: logista-kafka-1.0-SNAPSHOT.jar
+    src: kafka-producer-1.0-SNAPSHOT.jar
     dest: /opt/nginx/jars/
     owner: nginx
     group: nginx
