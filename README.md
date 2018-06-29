@@ -37,6 +37,11 @@ Oracle VM VirtualBox Manager 5.2.12
 # vagrant up
 # ansible-playbook -i production site.yml
 ```
+Send messages to topic:
+```
+curl "mensaje" -u kafka:k4fk4 http://127.0.0.1:8081
+```
+
 Destroy environment:
 ```
 # vagrant destroy
